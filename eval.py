@@ -2,13 +2,12 @@ import argparse
 import time
 import logging
 import os,sys
-sys.path.append('/mnt/data-3/data/jiemin.fang/job-submit/mvppt_eatv2/')
 import mxnet as mx
 
 def score(data_path, metrics, gpus, batch_size,
           image_shape='3,224,224', data_nthreads=4, 
           label_name='softmax_label', max_num_examples=None,
-          model_path='./eatmodel/'):
+          model_path='./'):
     # create data iterator
     data_mean = [123.68,116.78,103.94]
     data_shape = tuple([int(i) for i in image_shape.split(',')])
@@ -61,6 +60,7 @@ if __name__ == '__main__':
     parser.add_argument('--gpus', type=str, default='0,1')
     parser.add_argument('--batch_size', type=int, default=256)
     parser.add_argument('--data_path', type=str, required=True)
+    parser.add_argument('--model_path', type=str, required=True)
     parser.add_argument('--image_shape', type=str, default='3,224,224')
     parser.add_argument('--data_nthreads', type=int, default=4,
                         help='number of threads for data decoding')
@@ -74,7 +74,8 @@ if __name__ == '__main__':
     (speed,) = score(data_path=args.data_path,
                     metrics = metrics,
                     gpus=args.gpus,
-                    batch_size=args.batch_size)
+                    batch_size=args.batch_size,
+                    model_path=args.model_path)
     logging.info('Finished with %f images per second', speed)
 
     for m in metrics:
