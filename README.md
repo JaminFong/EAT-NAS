@@ -22,5 +22,5 @@ Our pretrained models can be downloaded in the following:
 * [EATNet-S](https://drive.google.com/open?id=1jUx6h-Pk4H2bFsVPlcBzILapusdZ1fha)
 
 ## Evaluate
-1. Download the pretrained models and put them (.params and .json) into the `model_path`
+1. Download the pretrained model and put .params and .json into the `model_path`
 2. `python eval.py --data_path 'The path to ImageNet data' --model_path 'The path you put the pretrained model'`
